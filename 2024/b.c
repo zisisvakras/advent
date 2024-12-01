@@ -1,10 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int longcmp(const void *a, const void *b) {
-    return *(long*)a - *(long*)b;
-}
-
+/* Input is small just do n^2 */
 int main(void) {
     FILE *fp = fopen("./input", "r");
     int lines = 0;
@@ -14,12 +11,14 @@ int main(void) {
     long *array2 = malloc(lines * sizeof(long));
     for (int i = 0 ; i < lines ; ++i)
         fscanf(fp, "%ld%ld", &array1[i], &array2[i]);
-    qsort(array1, lines, sizeof(long), longcmp);
-    qsort(array2, lines, sizeof(long), longcmp);
-    long diff = 0;
-    for (int i = 0 ; i < lines ; ++i)
-        diff += labs(array1[i] - array2[i]);
-    printf("%ld\n", diff);
+    long sim = 0;
+    for (int i = 0 ; i < lines ; ++i) {
+        long csim = 0;
+        for (int j = 0 ; j < lines ; ++j)
+            csim += array2[j] == array1[i];
+        sim += array1[i] * csim;
+    }
+    printf("%ld\n", sim);
     free(array1);
     free(array2);
     fclose(fp);
