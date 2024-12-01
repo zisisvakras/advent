@@ -36,12 +36,12 @@ int is_digit(char *buffer, int start, int len) {
 int main(void) {
     char buffer[1024];
     int sum = 0;
-    while (scanf(" %1023[^\n]", buffer) == 1) {
+    while (scanf(" %1023[^\r\n]", buffer) == 1) {
         int len = strlen(buffer), i = 0, digit = 0, temp;
         while (!(temp = is_digit(buffer, i, len))) ++i;
         sum += temp * 10;
         digit = temp;
-        printf("%d", temp);
+        printf("%s %d", buffer, temp);
         for (; i < len ; ++i) {
             if ((temp = is_digit(buffer, i, len)))
                 digit = temp;
