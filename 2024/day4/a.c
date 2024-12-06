@@ -38,7 +38,7 @@ int find_xmas(char **a, int i, int j, char f, Direction d) {
 }
 
 int main(void) {
-    /* Get input array*/
+    /* Get input array */
     FILE *fp = fopen("./input", "r");
     fscanf(fp, " %*[^\n]");
     perline = ftell(fp); /* So exploitable :D */
